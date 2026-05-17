@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2026-05-17)
 
 **Core value:** Deliver fast, reliable NEO hazard insight on low-resource hardware using a minimal local-first data stack.
-**Current focus:** Phase 1 - Ingestion Baseline and Raw Capture
+**Current focus:** Phase 2 - Analytics Core and Hazard Classification
 
 ## Initialization Snapshot
 
@@ -22,10 +22,10 @@ See: .planning/PROJECT.md (updated 2026-05-17)
 
 | Phase | Status | Plans | Progress |
 |-------|--------|-------|----------|
-| 1 | Ready to execute | 3/3 | 100% |
+| 1 | Complete | 3/3 | 100% |
 | 2 | Pending | 0/0 | 0% |
 | 3 | Pending | 0/0 | 0% |
 | 4 | Pending | 0/0 | 0% |
 
 ---
-*Last updated: 2026-05-17 after phase 1 planning*
+*Last updated: 2026-05-17 after phase 1 execution*

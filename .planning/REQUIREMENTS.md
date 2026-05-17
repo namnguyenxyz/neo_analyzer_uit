@@ -63,10 +63,10 @@ Deferred to future release. Tracked but not in current roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ING-01 | Phase 1 | Pending |
-| ING-02 | Phase 1 | Pending |
-| ING-03 | Phase 1 | Pending |
-| RAW-01 | Phase 1 | Pending |
+| ING-01 | Phase 1 | Complete |
+| ING-02 | Phase 1 | Complete |
+| ING-03 | Phase 1 | Complete |
+| RAW-01 | Phase 1 | Complete |
 | RAW-02 | Phase 2 | Pending |
 | RAW-03 | Phase 2 | Pending |
 | ANL-01 | Phase 2 | Pending |
@@ -76,7 +76,7 @@ Deferred to future release. Tracked but not in current roadmap.
 | DSH-02 | Phase 3 | Pending |
 | DSH-03 | Phase 3 | Pending |
 | DSH-04 | Phase 3 | Pending |
-| OPS-01 | Phase 1 | Pending |
+| OPS-01 | Phase 1 | Complete |
 | OPS-02 | Phase 4 | Pending |
 | OPS-03 | Phase 4 | Pending |
 
