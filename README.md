@@ -108,3 +108,46 @@ Expected behavior:
 - KPI cards show total NEOs, total PHAs, and the closest approach object for today.
 - The explorer supports search, hazard-only filtering, sort direction, and pagination.
 - Plotly charts render size distribution and approach velocity vs miss distance from `neo_hazard_classified`.
+
+## Full End-to-End Run Order
+
+For a complete local pipeline run:
+
+1. **Start infrastructure:**
+   ```bash
+   docker compose up -d redis
+   ```
+
+2. **Optional: Generate sample data** (requires valid NASA API key):
+   ```bash
+   export NASA_API_KEY=your_key
+   python -m src.ingestion.publish_stream
+   ```
+
+3. **Build analytics from local raw data:**
+   ```bash
+   python -m src.analytics.build_analytics_db --rebuild
+   ```
+
+4. **Launch dashboard:**
+   ```bash
+   streamlit run src/dashboard/app.py
+   ```
+
+## Troubleshooting
+
+### Database errors / DB file locked
+- Ensure no other process has a write connection to `neo_analytics.db`
+- Rebuild with `python -m src.analytics.build_analytics_db --rebuild` to reset
+
+### Dashboard: "No data available"
+- Run the analytics build first: `python -m src.analytics.build_analytics_db --rebuild`
+- Verify the `neo_analytics.db` file exists in the repo root
+
+### Missing packages / Import errors
+- Ensure you're using the workspace Python: `.venv/bin/python`
+- Reinstall dependencies: `.venv/bin/pip install -r requirements.txt`
+
+### Redis connection errors
+- Verify Redis is running: `docker compose ps redis`
+- Restart if needed: `docker compose down && docker compose up -d redis`

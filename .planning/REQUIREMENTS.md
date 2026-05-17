@@ -35,8 +35,8 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Operations
 
 - [x] **OPS-01**: Repository includes minimal `docker-compose.yml` with Redis memory limit.
-- [ ] **OPS-02**: Repository includes `requirements.txt` with exact versions for required Python packages.
-- [ ] **OPS-03**: README includes startup steps for Redis, pipeline scripts, and dashboard launch.
+- [x] **OPS-02**: Repository includes `requirements.txt` with exact versions for required Python packages.
+- [x] **OPS-03**: README includes startup steps for Redis, pipeline scripts, and dashboard launch.
 
 ## v2 Requirements
 
