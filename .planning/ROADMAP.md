@@ -74,5 +74,20 @@
 2. README documents startup, run order, and troubleshooting for the full local stack.
 3. End-to-end flow validates from NASA API to dashboard without heavy dependencies.
 
+**Planned Execution Waves**
+
+**Wave 1**
+- 04-01: Dependency manifest audit and runtime compatibility validation
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- 04-02: README hardening with run order, troubleshooting, and dashboard launch guidance
+
+**Wave 3** *(blocked on Waves 1-2 completion)*
+- 04-03: Full release smoke validation from ingestion to dashboard and delivery sign-off
+
+**Cross-cutting constraints:**
+- Keep the final phase lightweight; prefer validation and documentation over new features
+- Preserve the current low-memory dependency set and avoid introducing heavy packaging layers
+
 ---
 *Last updated: 2026-05-17 after phase 2 planning*
