@@ -41,6 +41,21 @@
 2. Hazard logic correctly flags PHA candidates using miss distance and diameter thresholds.
 3. `neo_analytics.db` is generated and queryable for dashboard consumption.
 
+**Planned Execution Waves**
+
+**Wave 1**
+- 02-01: Raw Parquet to typed DuckDB transformation with deterministic dedupe
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- 02-02: Threshold-based hazard classification and PHA table materialization
+
+**Wave 3** *(blocked on Waves 1-2 completion)*
+- 02-03: End-to-end analytics DB build orchestration and serving views
+
+**Cross-cutting constraints:**
+- Keep transformation SQL-first in DuckDB to preserve low-memory execution
+- Enforce deterministic reruns using stable dedupe keys and explicit ordering
+
 ### Phase 3: Dashboard Experience
 **Goal:** Deliver fast, useful exploration and visualization on local analytics data.
 **Mode:** mvp
@@ -60,4 +75,4 @@
 3. End-to-end flow validates from NASA API to dashboard without heavy dependencies.
 
 ---
-*Last updated: 2026-05-17 after phase 1 planning*
+*Last updated: 2026-05-17 after phase 2 planning*
