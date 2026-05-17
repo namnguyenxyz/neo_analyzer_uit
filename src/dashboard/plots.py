@@ -7,5 +7,11 @@ def size_distribution(df):
 
 
 def approach_velocity_scatter(df):
-    fig = px.scatter(df, x="miss_distance_au", y="relative_velocity_km_s", color="is_potentially_hazardous")
+    fig = px.scatter(
+        df,
+        x="miss_distance_au",
+        y="relative_velocity_km_s",
+        color="is_potentially_hazardous",
+        title="Approach velocity vs miss distance",
+    )
     return fig

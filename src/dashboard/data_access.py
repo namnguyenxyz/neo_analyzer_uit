@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import duckdb
 
 
@@ -56,7 +57,55 @@ def fetch_latest(limit: int = 50, offset: int = 0):
     if not con:
         return []
     try:
-        rows = con.execute(f"select * from v_neo_latest limit {limit} offset {offset}").fetchall()
+        rows = con.execute(
+            "select * from v_neo_latest limit ? offset ?",
+            [limit, offset],
+        ).fetchall()
         return rows
+    except Exception:
+        return []
+
+
+def fetch_latest_filtered(
+    limit: int = 50,
+    offset: int = 0,
+    search_text: str = "",
+    hazard_only: bool = False,
+    sort_desc: bool = False,
+):
+    con = connect()
+    if not con:
+        return []
+
+    where_clauses = []
+    params: list[object] = []
+
+    if search_text:
+        where_clauses.append("lower(object_name) like ?")
+        params.append(f"%{search_text.lower()}%")
+
+    if hazard_only:
+        where_clauses.append("coalesce(is_potentially_hazardous, false) = true")
+
+    where_sql = f" where {' and '.join(where_clauses)}" if where_clauses else ""
+    order_sql = " order by miss_distance_au desc" if sort_desc else " order by miss_distance_au asc"
+    sql = f"select * from v_neo_latest{where_sql}{order_sql} limit ? offset ?"
+    params.extend([limit, offset])
+
+    try:
+        return con.execute(sql, params).fetchall()
+    except Exception:
+        return []
+
+
+def fetch_visualization_frame(limit: int = 1000):
+    con = connect()
+    if not con:
+        return []
+    try:
+        return con.execute(
+            "select estimated_diameter_m, miss_distance_au, relative_velocity_km_s, is_potentially_hazardous from neo_hazard_classified limit ?",
+            [limit],
+        ).fetchdf()
     except Exception:
         return []

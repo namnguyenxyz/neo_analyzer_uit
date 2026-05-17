@@ -7,3 +7,4 @@ def kpi_card(col, label, value):
 
 def table_view(rows):
     st.dataframe(rows)
+
