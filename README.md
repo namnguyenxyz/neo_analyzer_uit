@@ -95,3 +95,16 @@ python -c "import duckdb; con=duckdb.connect('neo_analytics.db'); print(con.exec
 ```
 
 Expected: each query runs without error and returns a scalar or row tuple result.
+
+## Phase 3 Dashboard Smoke Check
+
+Launch the Streamlit dashboard against the local DuckDB file:
+
+```bash
+streamlit run src/dashboard/app.py
+```
+
+Expected behavior:
+- KPI cards show total NEOs, total PHAs, and the closest approach object for today.
+- The explorer supports search, hazard-only filtering, sort direction, and pagination.
+- Plotly charts render size distribution and approach velocity vs miss distance from `neo_hazard_classified`.

@@ -27,10 +27,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Dashboard
 
-- [ ] **DSH-01**: Streamlit dashboard displays total active NEOs, total flagged PHAs, and closest approach of day.
-- [ ] **DSH-02**: Dashboard provides searchable/filterable NEO table sortable by proximity or velocity.
-- [ ] **DSH-03**: Dashboard renders Plotly charts for asteroid size distribution and approach velocity over time.
-- [ ] **DSH-04**: Dashboard reads `neo_analytics.db` in read-only mode.
+- [x] **DSH-01**: Streamlit dashboard displays total active NEOs, total flagged PHAs, and closest approach of day.
+- [x] **DSH-02**: Dashboard provides searchable/filterable NEO table sortable by proximity or velocity.
+- [x] **DSH-03**: Dashboard renders Plotly charts for asteroid size distribution and approach velocity over time.
+- [x] **DSH-04**: Dashboard reads `neo_analytics.db` in read-only mode.
 
 ### Operations
 
@@ -72,10 +72,10 @@ Deferred to future release. Tracked but not in current roadmap.
 | ANL-01 | Phase 2 | Complete |
 | ANL-02 | Phase 2 | Complete |
 | ANL-03 | Phase 2 | Complete |
-| DSH-01 | Phase 3 | Pending |
-| DSH-02 | Phase 3 | Pending |
-| DSH-03 | Phase 3 | Pending |
-| DSH-04 | Phase 3 | Pending |
+| DSH-01 | Phase 3 | Complete |
+| DSH-02 | Phase 3 | Complete |
+| DSH-03 | Phase 3 | Complete |
+| DSH-04 | Phase 3 | Complete |
 | OPS-01 | Phase 1 | Complete |
 | OPS-02 | Phase 4 | Pending |
 | OPS-03 | Phase 4 | Pending |
@@ -87,4 +87,4 @@ Deferred to future release. Tracked but not in current roadmap.
 
 ---
 *Requirements defined: 2026-05-17*
-*Last updated: 2026-05-17 after phase 2 execution*
+*Last updated: 2026-05-17 after phase 3 execution*

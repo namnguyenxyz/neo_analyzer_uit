@@ -98,6 +98,33 @@ def fetch_latest_filtered(
         return []
 
 
+def count_latest_filtered(
+    search_text: str = "",
+    hazard_only: bool = False,
+):
+    con = connect()
+    if not con:
+        return 0
+
+    where_clauses = []
+    params: list[object] = []
+
+    if search_text:
+        where_clauses.append("lower(object_name) like ?")
+        params.append(f"%{search_text.lower()}%")
+
+    if hazard_only:
+        where_clauses.append("coalesce(is_potentially_hazardous, false) = true")
+
+    where_sql = f" where {' and '.join(where_clauses)}" if where_clauses else ""
+    sql = f"select count(*) from v_neo_latest{where_sql}"
+
+    try:
+        return con.execute(sql, params).fetchone()[0]
+    except Exception:
+        return 0
+
+
 def fetch_visualization_frame(limit: int = 1000):
     con = connect()
     if not con:
