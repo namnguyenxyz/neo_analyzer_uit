@@ -3,8 +3,13 @@ import duckdb
 
 
 def _db_path() -> str:
-    repo_root = Path(__file__).resolve().parents[3]
-    return str((repo_root / "neo_analytics.db").resolve())
+    # file layout: <repo>/src/dashboard/data_access.py -> parents[2] is repo root
+    repo_root = Path(__file__).resolve().parents[2]
+    db_file = repo_root / "neo_analytics.db"
+    if db_file.exists():
+        return str(db_file.resolve())
+    # fallback to working dir path
+    return str(Path("neo_analytics.db").resolve())
 
 
 def connect(read_only: bool = True):
