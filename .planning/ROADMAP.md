@@ -19,6 +19,19 @@
 2. Redis-backed consumer writes daily-partitioned Parquet without data loss in nominal runs.
 3. Redis service runs via minimal docker compose with memory cap and restart policy.
 
+**Planned Execution Waves**
+
+**Wave 1**
+- 01-01: Redis runtime foundation and shared config/logging modules
+- 01-02: NASA producer and stream publishing pipeline
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- 01-03: Redis consumer and partitioned Parquet raw writer
+
+**Cross-cutting constraints:**
+- Preserve low-memory operation with bounded Redis and batch-oriented processing
+- Use shared config conventions (`neo:stream`, runtime env defaults) across all scripts
+
 ### Phase 2: Analytics Core and Hazard Classification
 **Goal:** Build deterministic transformation pipeline and PHA flagging logic in DuckDB.
 **Mode:** mvp
@@ -47,4 +60,4 @@
 3. End-to-end flow validates from NASA API to dashboard without heavy dependencies.
 
 ---
-*Last updated: 2026-05-17 after initial roadmap creation*
+*Last updated: 2026-05-17 after phase 1 planning*
