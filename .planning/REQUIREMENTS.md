@@ -9,21 +9,21 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Ingestion
 
-- [ ] **ING-01**: System can fetch Near-Earth Object close-approach data from NASA CNEOS/JPL API on a schedule.
-- [ ] **ING-02**: System handles API rate limits and transient failures with retry and backoff.
-- [ ] **ING-03**: System publishes each fetched payload to Redis stream `neo:stream`.
+- [x] **ING-01**: System can fetch Near-Earth Object close-approach data from NASA CNEOS/JPL API on a schedule.
+- [x] **ING-02**: System handles API rate limits and transient failures with retry and backoff.
+- [x] **ING-03**: System publishes each fetched payload to Redis stream `neo:stream`.
 
 ### Raw Storage
 
-- [ ] **RAW-01**: Consumer can read events from Redis and persist raw records to daily-partitioned Parquet files.
-- [ ] **RAW-02**: Raw records include normalized core fields required for downstream analytics.
-- [ ] **RAW-03**: Raw write process avoids duplicate inserts for identical ingestion windows.
+- [x] **RAW-01**: Consumer can read events from Redis and persist raw records to daily-partitioned Parquet files.
+- [x] **RAW-02**: Raw records include normalized core fields required for downstream analytics.
+- [x] **RAW-03**: Raw write process avoids duplicate inserts for identical ingestion windows.
 
 ### Analytics
 
-- [ ] **ANL-01**: Transformation job can query raw Parquet via DuckDB and cast fields into analytical schema.
-- [ ] **ANL-02**: System flags Potentially Hazardous Asteroid when miss distance < 0.05 AU and estimated diameter > 140m.
-- [ ] **ANL-03**: Serving tables are persisted to local DuckDB file `neo_analytics.db` for fast read access.
+- [x] **ANL-01**: Transformation job can query raw Parquet via DuckDB and cast fields into analytical schema.
+- [x] **ANL-02**: System flags Potentially Hazardous Asteroid when miss distance < 0.05 AU and estimated diameter > 140m.
+- [x] **ANL-03**: Serving tables are persisted to local DuckDB file `neo_analytics.db` for fast read access.
 
 ### Dashboard
 
@@ -34,7 +34,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Operations
 
-- [ ] **OPS-01**: Repository includes minimal `docker-compose.yml` with Redis memory limit.
+- [x] **OPS-01**: Repository includes minimal `docker-compose.yml` with Redis memory limit.
 - [ ] **OPS-02**: Repository includes `requirements.txt` with exact versions for required Python packages.
 - [ ] **OPS-03**: README includes startup steps for Redis, pipeline scripts, and dashboard launch.
 
@@ -67,11 +67,11 @@ Deferred to future release. Tracked but not in current roadmap.
 | ING-02 | Phase 1 | Complete |
 | ING-03 | Phase 1 | Complete |
 | RAW-01 | Phase 1 | Complete |
-| RAW-02 | Phase 2 | Pending |
-| RAW-03 | Phase 2 | Pending |
-| ANL-01 | Phase 2 | Pending |
-| ANL-02 | Phase 2 | Pending |
-| ANL-03 | Phase 2 | Pending |
+| RAW-02 | Phase 2 | Complete |
+| RAW-03 | Phase 2 | Complete |
+| ANL-01 | Phase 2 | Complete |
+| ANL-02 | Phase 2 | Complete |
+| ANL-03 | Phase 2 | Complete |
 | DSH-01 | Phase 3 | Pending |
 | DSH-02 | Phase 3 | Pending |
 | DSH-03 | Phase 3 | Pending |
@@ -87,4 +87,4 @@ Deferred to future release. Tracked but not in current roadmap.
 
 ---
 *Requirements defined: 2026-05-17*
-*Last updated: 2026-05-17 after initial definition*
+*Last updated: 2026-05-17 after phase 2 execution*

@@ -60,3 +60,38 @@ Expected partition pattern:
 
 - Stream name defaults to `neo:stream`.
 - Configure runtime via environment variables in `src/common/config.py`.
+
+## Phase 2 Transform Smoke Check
+
+Run typed transformation against local raw parquet partitions:
+
+```bash
+python -m src.analytics.transform_raw_to_typed
+```
+
+Verify output artifact and typed row count:
+
+```bash
+test -f neo_analytics.db
+python -c "import duckdb; con=duckdb.connect('neo_analytics.db'); print(con.execute('select count(*) from neo_typed_staging').fetchone()[0])"
+```
+
+Expected: command succeeds and returns a non-negative integer.
+
+## Phase 2 Analytics Build
+
+Build the full analytics serving layer (transform + hazard classification + views):
+
+```bash
+python -m src.analytics.build_analytics_db --rebuild
+```
+
+Verify queryability for totals, hazardous counts, and closest approach today:
+
+```bash
+python -c "import duckdb; con=duckdb.connect('neo_analytics.db'); print(con.execute('select * from v_pha_counts').fetchall())"
+python -c "import duckdb; con=duckdb.connect('neo_analytics.db'); print(con.execute('select * from v_closest_approach_today').fetchall())"
+python -c "import duckdb; con=duckdb.connect('neo_analytics.db'); print(con.execute('select count(*) from v_neo_latest').fetchone()[0])"
+```
+
+Expected: each query runs without error and returns a scalar or row tuple result.

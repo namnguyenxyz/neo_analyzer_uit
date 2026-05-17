@@ -1,43 +1,42 @@
-# Phase 2 Plan Verification
+# Phase 2 Execution Verification
 
 **Phase:** 2 - Analytics Core and Hazard Classification
 **Checked:** 2026-05-17
-**Checker:** gsd-plan-checker
-**Verdict:** PASS
+**Verifier:** inline-orchestrator fallback (gsd-verifier unavailable)
 
 ## Verification Complete
 
 ## Must-Haves Review
 
-- Plan coverage maps all in-scope requirements:
-  - RAW-02, RAW-03, ANL-01 -> `02-01-PLAN.md`
-  - ANL-02 -> `02-02-PLAN.md`
-  - ANL-03 -> `02-03-PLAN.md`
-- Wave/dependency topology is coherent and sequential:
-  - `02-01` (`wave: 1`) -> no dependencies
-  - `02-02` (`wave: 2`) -> depends on `02-01`
-  - `02-03` (`wave: 3`) -> depends on `02-01`, `02-02`
-- Each plan includes explicit task actions and verification commands.
+- Raw parquet data is transformed into typed analytical table `neo_typed_staging` in `neo_analytics.db`.
+- Duplicate records are collapsed deterministically by `event_id` and latest `fetched_at_utc` ordering.
+- Hazard classification uses exact requirement thresholds (`miss_distance_au < 0.05` and `estimated_diameter_m > 140`).
+- Serving objects `v_neo_latest`, `v_pha_counts`, and `v_closest_approach_today` are created and queryable.
 
-## Planning Quality Summary
+## Requirements Coverage
 
-- Requirement coverage: PASS
-- Wave/dependency correctness: PASS
-- Task executability shape: PASS
-- Required changes: None
+- RAW-02: Implemented by typed projection in `src/analytics/sql/raw_to_typed.sql`.
+- RAW-03: Implemented by row-number dedupe in `src/analytics/sql/raw_to_typed.sql`.
+- ANL-01: Implemented by DuckDB transformation runner `src/analytics/transform_raw_to_typed.py`.
+- ANL-02: Implemented by hazard SQL and runner in `src/analytics/sql/hazard_classification.sql` and `src/analytics/classify_hazard.py`.
+- ANL-03: Implemented by persisted DuckDB serving pipeline in `src/analytics/build_analytics_db.py`.
 
 ## Evidence
 
-- Phase research created: `02-RESEARCH.md`
-- Plan files created:
-  - `02-01-PLAN.md`
-  - `02-02-PLAN.md`
-  - `02-03-PLAN.md`
-- Roadmap/state updated for phase 2 planning:
-  - `.planning/ROADMAP.md`
-  - `.planning/STATE.md`
+- Plan summaries created:
+  - `02-01-SUMMARY.md`
+  - `02-02-SUMMARY.md`
+  - `02-03-SUMMARY.md`
+- Runtime smoke checks executed successfully:
+  - `.venv/bin/python -m src.analytics.transform_raw_to_typed`
+  - `.venv/bin/python -m src.analytics.classify_hazard`
+  - `.venv/bin/python -m src.analytics.build_analytics_db --rebuild`
+- Post-build query checks returned valid results:
+  - `neo_typed_staging` row count = 2
+  - `neo_hazard_classified` row count = 2
+  - `v_pha_counts.total_phas` = 1
 
 ## Residual Risk
 
-- Verification validates planning quality only; runtime correctness still depends on Phase 2 execution and environment dependencies (`duckdb`, `pandas`, `pyarrow`).
-- Real data edge cases (null diameter, malformed timestamps) should be validated during `gsd-execute-phase`.
+- Verification used a synthetic local sample dataset; real NASA payload variations may still require tuning around null/invalid date fields.
+- The environment tool reports `/usr/bin/python3`, but installed project dependencies are currently usable in `.venv/bin/python`.
